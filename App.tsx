@@ -1,8 +1,13 @@
-// App.tsx — real navigation root, switches stacks based on auth state
+// App.tsx — Root navigator for AutoPost Nexus
+// Switches between auth stack (Login/Register) and app stack (Dashboard/CreatePost)
+// based on whether the user has a valid token.
+
 import React from 'react';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
@@ -34,7 +39,7 @@ function RootNavigator() {
       {token ? (
         <>
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
-          <Stack.Screen name="CreatePost" component={CreatePostScreen} options={{ headerShown: true, title: 'New Post' }} />
+          <Stack.Screen name="CreatePost" component={CreatePostScreen} />
         </>
       ) : (
         <>
@@ -50,6 +55,7 @@ export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
+        <StatusBar style="light" />
         <RootNavigator />
       </NavigationContainer>
     </AuthProvider>
@@ -57,5 +63,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  loading: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0a0a1a' },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0a0a1a',
+  },
 });
