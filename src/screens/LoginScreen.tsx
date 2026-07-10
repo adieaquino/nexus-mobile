@@ -19,8 +19,6 @@ export default function LoginScreen({ navigation }: Props) {
     setLoading(true);
     try {
       await signIn(email, password);
-      // Navigation to Dashboard happens automatically — App.tsx switches
-      // stacks based on auth state once signIn resolves.
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -34,6 +32,7 @@ export default function LoginScreen({ navigation }: Props) {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#64748b"
         autoCapitalize="none"
         keyboardType="email-address"
         value={email}
@@ -42,6 +41,7 @@ export default function LoginScreen({ navigation }: Props) {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#64748b"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
