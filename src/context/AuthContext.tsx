@@ -1,7 +1,7 @@
 // src/context/AuthContext.tsx
-// Real token persistence via AsyncStorage (survives app restart).
+// Real token persistence via AsyncStorage, not in-memory-only (survives app restart).
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as api from '../api/client';
 
@@ -34,37 +34,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUserId(parsed.userId);
           setEmail(parsed.email);
         } catch {
-          // corrupted storage — ignore
+          // corrupted storage — ignore, user will need to sign in again
         }
       }
       setLoading(false);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const persist = useCallback(async (t: string, uid: string, em: string) => {
+  async function persist(t: string, uid: string, em: string) {
     setToken(t);
     setUserId(uid);
     setEmail(em);
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ token: t, userId: uid, email: em }));
-  }, []);
+  }
 
-  const signIn = useCallback(async (emailInput: string, password: string) => {
+  async function signIn(emailInput: string, password: string) {
     const res = await api.login(emailInput, password);
     await persist(res.token, res.user.id, res.user.email);
-  }, [persist]);
+  }
 
-  const signUp = useCallback(async (emailInput: string, password: string, name?: string) => {
+  async function signUp(emailInput: string, password: string, name?: string) {
     const res = await api.register(emailInput, password, name);
     await persist(res.token, res.user.id, res.user.email);
-  }, [persist]);
+  }
 
-  const signOut = useCallback(async () => {
+  async function signOut() {
     setToken(null);
     setUserId(null);
     setEmail(null);
     await AsyncStorage.removeItem(STORAGE_KEY);
-  }, []);
+  }
 
   return (
     <AuthContext.Provider value={{ token, userId, email, loading, signIn, signUp, signOut }}>
