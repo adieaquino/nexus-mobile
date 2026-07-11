@@ -1,6 +1,19 @@
 // src/api/client.ts
 // Real fetch-based client for the nexus-backend API. No mocking.
-const DEPLOYED_BACKEND_URL = 'https://nexus-backend-lpt1.onrender.com';
+//
+// ANDROID NETWORKING NOTE (real, not hypothetical): "localhost" from an
+// Android emulator refers to the emulator itself, not your dev machine.
+//   - Android Emulator → use 10.0.2.2 to reach your host machine's localhost
+//   - Physical Android device → use your dev machine's LAN IP (e.g. 192.168.x.x)
+//     and make sure the backend's `cors()` + your firewall allow it
+//   - iOS Simulator → localhost works directly
+// Set API_BASE_URL below or via EXPO_PUBLIC_API_BASE_URL before running.
+
+// ⬇️ AFTER YOU DEPLOY TO RENDER: replace this with your real URL, e.g.
+//    'https://nexus-backend-xxxx.onrender.com' (no trailing slash).
+// Until then it falls back to the Android emulator address (10.0.2.2) or
+// EXPO_PUBLIC_API_BASE_URL if you set that env var instead.
+const DEPLOYED_BACKEND_URL = 'https://nexus-backend-lpt1.onrender.com'; // <-- your live Render backend
 
 export const API_BASE_URL =
   DEPLOYED_BACKEND_URL ||
