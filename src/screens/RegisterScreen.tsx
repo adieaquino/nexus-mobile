@@ -30,17 +30,10 @@ export default function RegisterScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name (optional)"
-        placeholderTextColor="#64748b"
-        value={name}
-        onChangeText={setName}
-      />
+      <TextInput style={styles.input} placeholder="Name (optional)" value={name} onChangeText={setName} />
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="#64748b"
         autoCapitalize="none"
         keyboardType="email-address"
         value={email}
@@ -49,7 +42,6 @@ export default function RegisterScreen({ navigation }: Props) {
       <TextInput
         style={styles.input}
         placeholder="Password"
-        placeholderTextColor="#64748b"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
