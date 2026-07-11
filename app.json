@@ -1,28 +1,15 @@
 {
   "expo": {
-    "name": "AutoPost Nexus",
-    "slug": "autpost-nexus-mobile",
+    "name": "nexus-mobile",
+    "slug": "nexus-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "newArchEnabled": true,
-    "splash": {
-      "backgroundColor": "#0a0a1a",
-      "resizeMode": "contain"
-    },
+    "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.autpostnexus.mobile"
+      "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#0a0a1a"
-      },
-      "package": "com.autpostnexus.mobile"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "predictiveBackGestureEnabled": false
     }
   }
 }
