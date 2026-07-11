@@ -1,6 +1,5 @@
 // src/api/client.ts
 // Real fetch-based client for the nexus-backend API. No mocking.
-
 const DEPLOYED_BACKEND_URL = 'https://nexus-backend-lpt1.onrender.com';
 
 export const API_BASE_URL =
